@@ -2,13 +2,13 @@ import React, { useMemo } from 'react';
 import BottomSheet from '@gorhom/bottom-sheet';
 import { SafeAreaView, View, Text, StyleSheet, ScrollView } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { HomeScreenStyles } from '../styles/HomeScreenStyles';
+import { HomeScreenStyles } from '../../styles/HomeScreenStyles';
 
 type TProps = {
     navigation: any
 }
 
-const HomeScreen = ({ navigation }: TProps): React.ReactElement => {
+const ProductScreen = ({ navigation }: TProps): React.ReactElement => {
     const snapPoints = useMemo(() => ['25%', '50%', '90%'], []);
 
     return (
@@ -52,7 +52,7 @@ const HomeScreen = ({ navigation }: TProps): React.ReactElement => {
     );
 }
 
-export default HomeScreen;
+export default ProductScreen;
 
 const styles = StyleSheet.create({
     container: {

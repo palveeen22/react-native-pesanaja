@@ -1,10 +1,11 @@
 import React from 'react'
 import { SafeAreaView, Text, View, TouchableOpacity, ScrollView } from 'react-native'
-import { ProfileScreenStyle } from '../styles/ProfileScreenStyles'
-import { profileData, textProfile } from '../data'
+import { ProfileScreenStyle } from '../../styles/ProfileScreenStyles'
+import { profileData, textProfile } from '../../data'
+import { TProps } from '../../types'
 
 
-const ProfileScreen = (): React.ReactElement => {
+const ProfileScreen = ({ navigation }: TProps): React.ReactElement => {
     return (
         <SafeAreaView style={ProfileScreenStyle.Container}>
             <ScrollView>
@@ -27,11 +28,13 @@ const ProfileScreen = (): React.ReactElement => {
                     <Text>Связаться с нами</Text>
                 </TouchableOpacity>
                 <View style={ProfileScreenStyle.BoxBawah}>
-                    {textProfile?.map((data, index) => {
-                        return (
-                            <Text style={ProfileScreenStyle.TextGrey} key={index}>{data}</Text>
-                        )
-                    })}
+                    <Text style={ProfileScreenStyle.TextGrey}
+                        onPress={() => {
+                            navigation.navigate("Chat")
+                        }}
+                    >Ответы на вопросы</Text>
+                    <Text style={ProfileScreenStyle.TextGrey}>Правила и соглашения</Text>
+                    <Text style={ProfileScreenStyle.TextGrey}>Стать курьером-партнёром</Text>
                 </View>
 
             </ScrollView>
