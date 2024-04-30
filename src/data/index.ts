@@ -20,3 +20,5 @@ export const profileData = [
         icon : "⚙️"
     },
 ]
+
+export const textProfile = ["Ответы на вопросы", "Правила и соглашения", "Стать курьером-партнёром" ]

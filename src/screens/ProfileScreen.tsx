@@ -1,7 +1,7 @@
 import React from 'react'
 import { SafeAreaView, Text, View, TouchableOpacity, ScrollView } from 'react-native'
 import { ProfileScreenStyle } from '../styles/ProfileScreenStyles'
-import { profileData } from '../data'
+import { profileData, textProfile } from '../data'
 
 const ProfileScreen = () => {
     return (
@@ -12,9 +12,9 @@ const ProfileScreen = () => {
                     <Text style={ProfileScreenStyle.TextSmall}>+7 937 006 61 68</Text>
                 </View>
                 <View style={ProfileScreenStyle.BoxColumn}>
-                    {profileData?.map((data) => {
+                    {profileData?.map((data, index) => {
                         return (
-                            <View style={ProfileScreenStyle.ProfileContainer}>
+                            <View style={ProfileScreenStyle.ProfileContainer} key={index}>
                                 <Text style={{ fontSize: 35 }}>{data?.icon}</Text>
                                 <Text style={ProfileScreenStyle.TextProfile}>{data?.text}</Text>
                             </View>
@@ -26,9 +26,11 @@ const ProfileScreen = () => {
                     <Text>Связаться с нами</Text>
                 </TouchableOpacity>
                 <View style={ProfileScreenStyle.BoxBawah}>
-                    <Text style={ProfileScreenStyle.TextGrey}>Ответы на вопросы</Text>
-                    <Text style={ProfileScreenStyle.TextGrey}>Правила и соглашения</Text>
-                    <Text style={ProfileScreenStyle.TextGrey}>Стать курьером-партнёром</Text>
+                    {textProfile?.map((data, index) => {
+                        return (
+                            <Text style={ProfileScreenStyle.TextGrey} key={index}>{data}</Text>
+                        )
+                    })}
                 </View>
 
             </ScrollView>
