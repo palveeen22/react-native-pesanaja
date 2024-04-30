@@ -3,7 +3,8 @@ import { SafeAreaView, Text, View, TouchableOpacity, ScrollView } from 'react-na
 import { ProfileScreenStyle } from '../styles/ProfileScreenStyles'
 import { profileData, textProfile } from '../data'
 
-const ProfileScreen = () => {
+
+const ProfileScreen = (): React.ReactElement => {
     return (
         <SafeAreaView style={ProfileScreenStyle.Container}>
             <ScrollView>
