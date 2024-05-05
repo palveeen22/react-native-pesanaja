@@ -2,13 +2,13 @@ import React, { useMemo } from 'react';
 import BottomSheet from '@gorhom/bottom-sheet';
 import { SafeAreaView, View, Text, StyleSheet, ScrollView } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { HomeScreenStyles } from '../styles/HomeScreenStyles';
+import { HomeScreenStyles } from '../../styles/HomeScreenStyles';
 
 type TProps = {
     navigation: any
 }
 
-const HomeScreen = ({ navigation }: TProps): React.ReactElement => {
+const ProductScreen = ({ navigation }: TProps): React.ReactElement => {
     const snapPoints = useMemo(() => ['25%', '50%', '90%'], []);
 
     return (
@@ -19,9 +19,8 @@ const HomeScreen = ({ navigation }: TProps): React.ReactElement => {
                         <View style={HomeScreenStyles.column}>
                             <Text style={HomeScreenStyles.textBlack}
                                 onPress={() => {
-                                    navigation.navigate("Chat Room")
-                                }}
-                            >улица аделя кутуя, 82</Text>
+                                    navigation.navigate("Product")
+                                }} >улица аделя кутуя, 82</Text>
                             <Text style={HomeScreenStyles.textGray}
                                 onPress={() => {
                                     navigation.navigate("Carousel");
@@ -53,7 +52,7 @@ const HomeScreen = ({ navigation }: TProps): React.ReactElement => {
     );
 }
 
-export default HomeScreen;
+export default ProductScreen;
 
 const styles = StyleSheet.create({
     container: {
