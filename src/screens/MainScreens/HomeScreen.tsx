@@ -12,11 +12,10 @@ const HomeScreen = ({ navigation }: TProps): React.ReactElement => {
   const snapPoints = useMemo(() => ['25%', '50%', '90%'], []);
 
 
-  // const { data: products, isLoading } = useQuery<TProduct[]>({
-  //   queryKey: ['products'],
-  //   // Mengambil data dari endpoint yang sesuai
-  //   queryFn: () => fetch('https://fakestoreapi.com/products').then((resp) => resp.json()),
-  // })
+  const { data: products, isLoading } = useQuery<TProduct[]>({
+    queryKey: ['products'],
+    queryFn: () => fetch('https://fakestoreapi.com/products').then((resp) => resp.json()),
+  })
 
 
 
@@ -41,7 +40,42 @@ const HomeScreen = ({ navigation }: TProps): React.ReactElement => {
       </View>
       <BottomSheet snapPoints={snapPoints}>
         <ScrollView contentContainerStyle={HomeScreenStyles.contentContainer}>
-          {[...Array(5)].map((_, index) => (
+          {/* {[...Array(5)].map((_, index) => (
+            <View key={index}>
+              <Text style={HomeScreenStyles.sheetHeadline}>Выгодная полка</Text>
+              {products?.map((data, index) => {
+                return (
+                  <View style={HomeScreenStyles.gridCard} key={index}>
+                    <View key={index} style={HomeScreenStyles.cardSkeleton}>
+                      <Text>{data?.title}</Text>
+                    </View>
+                  </View>
+                )
+              })}
+            </View>
+          ))} */}
+          {[...Array(5)].map((_, outerIndex) => (
+            <View key={outerIndex}>
+              <Text style={HomeScreenStyles.sheetHeadline}>Выгодная полка</Text>
+              <View style={HomeScreenStyles.gridCard}>
+                {[...Array(4)].map((_, innerIndex) => (
+                  <View key={innerIndex} style={HomeScreenStyles.cardSkeleton}>
+                    <Text>{products?.[outerIndex * 4 + innerIndex]?.title}</Text>
+                  </View>
+                ))}
+              </View>
+            </View>
+          ))}
+
+        </ScrollView>
+      </BottomSheet>
+    </GestureHandlerRootView>
+
+  )
+}
+
+/*
+ {[...Array(5)].map((_, index) => (
             <View key={index}>
               <Text style={HomeScreenStyles.sheetHeadline}>Выгодная полка</Text>
               <View style={HomeScreenStyles.gridCard}>
@@ -50,13 +84,8 @@ const HomeScreen = ({ navigation }: TProps): React.ReactElement => {
                 ))}
               </View>
             </View>
-          ))}
-        </ScrollView>
-      </BottomSheet>
-    </GestureHandlerRootView>
-
-  )
-}
+          ))} 
+*/
 
 export default HomeScreen
 
