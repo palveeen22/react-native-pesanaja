@@ -1,147 +1,120 @@
-import React, { useState } from 'react'
-import { SafeAreaView, StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native'
-import { colors } from '../../styles/Colors'
-import { KeyboardProvider } from "react-native-keyboard-controller";
+import React, { useState } from 'react';
+import {
+  SafeAreaView,
+  Text,
+  View,
+  TextInput,
+  TouchableOpacity,
+  KeyboardAvoidingView,
+  Platform,
+  TouchableWithoutFeedback,
+  Keyboard,
+  Button,
+  FlatList,
+} from 'react-native';
+import { KeyboardProvider } from 'react-native-keyboard-controller';
+import { ChatScreenStyles } from '../../styles/ChatScreenStyles';
 
+type TMessage = {
+  sender: string;
+  content: string;
+};
+
+const chatDummy: TMessage[] = [
+  { sender: 'user', content: 'Hello! How are you?' },
+  {
+    sender: 'bot',
+    content: "Hi there! I'm doing well, thank you. How can I assist you today?",
+  },
+  { sender: 'user', content: 'I have a question about JavaScript.' },
+  {
+    sender: 'bot',
+    content: "Sure thing! Feel free to ask, and I'll do my best to help you.",
+  },
+  {
+    sender: 'user',
+    content: 'How can I fetch data from an API using TypeScript?',
+  },
+  {
+    sender: 'bot',
+    content:
+      "To fetch data from an API in TypeScript, you can use the 'fetch' function, like this...",
+  },
+];
 
 const ChatScreen = () => {
-
+  const [messages, setMessages] = useState<TMessage[]>(chatDummy);
   const [message, setMessage] = useState<string>('');
 
   const handleSendMessage = () => {
-    // Handle sending the message
-    console.log("Message sent:", message);
-    // Reset the message input field after sending
+    const newMessage: TMessage = { sender: 'user', content: message };
+    setMessages([...messages, newMessage]);
     setMessage('');
   };
 
-
   return (
     <KeyboardProvider>
-      <SafeAreaView style={styles.container}>
-        <View style={{
-          backgroundColor: colors.samokat,
-          padding: 10,
-          marginLeft: '45%',
-          marginTop: 5,
-          marginRight: "5%",
-          maxWidth: '50%',
-          alignSelf: 'flex-end',
-          borderRadius: 20,
-          // borderRadius: 5,
-          //marginBottom: 15,
-          // maxWidth: 500,
-        }} >
-          <Text style={{ fontSize: 16, color: "#fff", }}>Здравствуйте!</Text>
-          <View style={styles.rightArrow}></View>
-          <View style={styles.rightArrowOverlap}></View>
-        </View>
-        <View style={{
-          backgroundColor: "#dedede",
-          padding: 10,
-          marginTop: 5,
-          marginLeft: "5%",
-          maxWidth: '50%',
-          alignSelf: 'flex-start',
-          borderRadius: 20,
-          // borderRadius: 5,
-          //maxWidth: 500,
-          //padding: 14,
-          //alignItems:"center",
-        }}>
-          <Text style={{ fontSize: 16, color: "#000", justifyContent: "center" }}>Pesanaja, 15 menit ke rumah....</Text>
-          <View style={styles.leftArrow}>
+      <SafeAreaView style={ChatScreenStyles.container}>
+        <View style={ChatScreenStyles.messageContainer}>
+          {/* <View style={ChatScreenStyles.boxSendChat} >
+            <Text style={ChatScreenStyles.textSend}>Hallo! Saya ingin bertanya</Text>
+            <View style={ChatScreenStyles.rightArrow}></View>
+            <View style={ChatScreenStyles.rightArrowOverlap}></View>
           </View>
-          <View style={styles.leftArrowOverlap}></View>
-        </View>
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={styles.input}
-            placeholder="Type your message here..."
-            value={message}
-            onChangeText={setMessage}
+          <View style={ChatScreenStyles.boxReceivedChat}>
+            <Text style={ChatScreenStyles.textReceived}>Pesanaja, 15 menit ke rumah....</Text>
+            <View style={ChatScreenStyles.leftArrow}>
+            </View>
+            <View style={ChatScreenStyles.leftArrowOverlap}></View>
+          </View> */}
+          <FlatList
+            data={messages}
+            renderItem={({ item, index }) => {
+              if (item.sender === 'user') {
+                return (
+                  <View style={ChatScreenStyles.boxSendChat} key={index}>
+                    <Text style={ChatScreenStyles.textSend}>
+                      {item.content}
+                    </Text>
+                    <View style={ChatScreenStyles.rightArrow}></View>
+                    <View style={ChatScreenStyles.rightArrowOverlap}></View>
+                  </View>
+                );
+              } else {
+                return (
+                  <View style={ChatScreenStyles.boxReceivedChat} key={index}>
+                    <Text style={ChatScreenStyles.textReceived}>
+                      {item.content}
+                    </Text>
+                    <View style={ChatScreenStyles.leftArrow}></View>
+                    <View style={ChatScreenStyles.leftArrowOverlap}></View>
+                  </View>
+                );
+              }
+            }}
+            keyExtractor={(item, index) => index.toString()}
           />
-          <TouchableOpacity style={styles.sendButton} onPress={handleSendMessage}>
-            <Text style={styles.sendButtonText}>Send</Text>
-          </TouchableOpacity>
         </View>
-      </SafeAreaView >
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          style={ChatScreenStyles.inputContainer}>
+          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <TextInput
+              style={ChatScreenStyles.input}
+              placeholder="Type your message here..."
+              value={message}
+              onChangeText={setMessage}
+            />
+          </TouchableWithoutFeedback>
+          <TouchableOpacity
+            style={ChatScreenStyles.sendButton}
+            onPress={handleSendMessage}>
+            <Text style={ChatScreenStyles.sendButtonText}>Send</Text>
+          </TouchableOpacity>
+        </KeyboardAvoidingView>
+      </SafeAreaView>
     </KeyboardProvider>
+  );
+};
 
-  )
-}
-
-export default ChatScreen
-
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  rightArrow: {
-    position: "absolute",
-    backgroundColor: colors.samokat,
-    width: 20,
-    height: 25,
-    bottom: 0,
-    borderBottomLeftRadius: 25,
-    right: -10
-  },
-
-  rightArrowOverlap: {
-    position: "absolute",
-    backgroundColor: "#eeeeee",
-    width: 20,
-    height: 35,
-    bottom: -6,
-    borderBottomLeftRadius: 18,
-    right: -20
-  },
-
-  /*Arrow head for recevied messages*/
-  leftArrow: {
-    position: "absolute",
-    backgroundColor: "#dedede",
-    width: 20,
-    height: 25,
-    bottom: 0,
-    borderBottomRightRadius: 25,
-    left: -10
-  },
-
-  leftArrowOverlap: {
-    position: "absolute",
-    backgroundColor: "#eeeeee",
-    width: 20,
-    height: 35,
-    bottom: -6,
-    borderBottomRightRadius: 18,
-    left: -20
-  },
-  inputContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    borderTopWidth: 1,
-    borderTopColor: '#ccc',
-  },
-  input: {
-    flex: 1,
-    backgroundColor: '#fff',
-    borderRadius: 20,
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    marginRight: 10,
-  },
-  sendButton: {
-    backgroundColor: colors.samokat,
-    borderRadius: 20,
-    paddingHorizontal: 15,
-    paddingVertical: 8,
-  },
-  sendButtonText: {
-    color: '#fff',
-    fontWeight: 'bold',
-  },
-})
+export default ChatScreen;

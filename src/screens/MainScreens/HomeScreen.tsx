@@ -4,11 +4,13 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import BottomSheet from '@gorhom/bottom-sheet';
 import { HomeScreenStyles } from '../../styles/HomeScreenStyles';
 import { colors } from '../../styles/Colors';
-import { TProps } from '../../types';
+import { TProps, TProduct } from '../../types';
 
 
 const HomeScreen = ({ navigation }: TProps): React.ReactElement => {
   const snapPoints = useMemo(() => ['25%', '50%', '90%'], []);
+
+
 
 
   return (
