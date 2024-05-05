@@ -56,17 +56,6 @@ const ChatScreen = () => {
     <KeyboardProvider>
       <SafeAreaView style={ChatScreenStyles.container}>
         <View style={ChatScreenStyles.messageContainer}>
-          {/* <View style={ChatScreenStyles.boxSendChat} >
-            <Text style={ChatScreenStyles.textSend}>Hallo! Saya ingin bertanya</Text>
-            <View style={ChatScreenStyles.rightArrow}></View>
-            <View style={ChatScreenStyles.rightArrowOverlap}></View>
-          </View>
-          <View style={ChatScreenStyles.boxReceivedChat}>
-            <Text style={ChatScreenStyles.textReceived}>Pesanaja, 15 menit ke rumah....</Text>
-            <View style={ChatScreenStyles.leftArrow}>
-            </View>
-            <View style={ChatScreenStyles.leftArrowOverlap}></View>
-          </View> */}
           <FlatList
             data={messages}
             renderItem={({ item, index }) => {

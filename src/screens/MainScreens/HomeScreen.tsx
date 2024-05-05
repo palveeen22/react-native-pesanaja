@@ -5,10 +5,18 @@ import BottomSheet from '@gorhom/bottom-sheet';
 import { HomeScreenStyles } from '../../styles/HomeScreenStyles';
 import { colors } from '../../styles/Colors';
 import { TProps, TProduct } from '../../types';
+import { useQuery } from '@tanstack/react-query';
 
 
 const HomeScreen = ({ navigation }: TProps): React.ReactElement => {
   const snapPoints = useMemo(() => ['25%', '50%', '90%'], []);
+
+
+  // const { data: products, isLoading } = useQuery<TProduct[]>({
+  //   queryKey: ['products'],
+  //   // Mengambil data dari endpoint yang sesuai
+  //   queryFn: () => fetch('https://fakestoreapi.com/products').then((resp) => resp.json()),
+  // })
 
 
 
