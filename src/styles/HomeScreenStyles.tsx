@@ -63,6 +63,7 @@ export const HomeScreenStyles = StyleSheet.create({
         justifyContent: 'center'
     },
     sheetHeadline: {
+        textAlign: "left",
         fontSize: 18,
         fontWeight: '600',
         padding: 10
