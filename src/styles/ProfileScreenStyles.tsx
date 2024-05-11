@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { colors } from "./Colors";
+import { colors } from "../lib/utils/Colors";
 
 
 export const ProfileScreenStyle = StyleSheet.create({

@@ -3,6 +3,9 @@ import HomeScreen from '../screens/MainScreens/HomeScreen';
 import ProfileScreen from '../screens/MainScreens/ProfileScreen';
 import ProductScreen from '../screens/MainScreens/ProductScreen';
 import ChatScreen from '../screens/Profile/ChatScreen';
+import ChartScreen from '../screens/Profile/ChartScreen';
+import ProductDetailScreen from '../screens/ProductScreens/ProductDetailScreen';
+import ChatBot from '../screens/Profile/ChatBot';
 
 const Stack = createStackNavigator();
 
@@ -29,7 +32,25 @@ const StackHolder = () => {
             <Stack.Screen
                 name="Chat"
                 component={ChatScreen}
-                options={{ headerShown: false }}
+                // options={{ headerShown: false }}
+                options={{ headerTitle: '', headerTransparent: true }}
+            />
+            <Stack.Screen
+                name="Chart"
+                component={ChartScreen}
+                // options={{ headerShown: false }}
+                options={{ headerTitle: '', headerTransparent: true }}
+            />
+            <Stack.Screen
+                name="Product Detail"
+                component={ProductDetailScreen}
+                // options={{ headerShown: false }}
+                options={{ headerTitle: '', headerTransparent: true }}
+            />
+            <Stack.Screen
+                name="Asking"
+                component={ChatBot}
+            // options={{ headerShown: false }}
             // options={{ headerTitle: '', headerTransparent: true }}
             />
         </Stack.Navigator>
