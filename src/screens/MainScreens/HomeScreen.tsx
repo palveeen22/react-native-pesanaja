@@ -42,7 +42,7 @@ const HomeScreen = ({ navigation }: TProps): React.ReactElement => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:3002/products-public');
+        const response = await fetch('http://localhost:3002/products-public' || "url");
         const json = await response.json();
         setData(json.data);
         setIsLoading(false);
